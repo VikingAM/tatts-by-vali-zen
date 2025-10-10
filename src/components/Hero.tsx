@@ -20,8 +20,11 @@ const Hero = () => {
             Precision <br />
             <span className="text-bronze">with Soul</span>
           </h1>
-          <p className="text-xl md:text-2xl text-foreground-secondary font-light mb-12 max-w-2xl leading-relaxed">
+          <p className="text-xl md:text-2xl text-foreground-secondary font-light mb-8 max-w-2xl leading-relaxed">
             Every line tells a story.
+          </p>
+          <p className="text-base md:text-lg text-foreground-secondary font-light mb-12 max-w-2xl">
+            Schwarz-Weiss Realism. Präzise, ruhig, ehrlich.
           </p>
           <a
             href="#contact"
