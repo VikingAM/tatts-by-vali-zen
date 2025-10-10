@@ -4,6 +4,7 @@ import EmotionalIntro from "@/components/EmotionalIntro";
 import Styles from "@/components/Styles";
 import MyApproach from "@/components/MyApproach";
 import About from "@/components/About";
+import Gallery from "@/components/Gallery";
 import Process from "@/components/Process";
 import Work from "@/components/Work";
 import Contact from "@/components/Contact";
@@ -19,6 +20,7 @@ const Index = () => {
         <Styles />
         <MyApproach />
         <About />
+        <Gallery />
         <Process />
         <Work />
         <Contact />
