@@ -7,7 +7,6 @@ import About from "@/components/About";
 import Gallery from "@/components/Gallery";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
-import Work from "@/components/Work";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -24,7 +23,6 @@ const Index = () => {
         <Gallery />
         <Process />
         <Testimonials />
-        <Work />
         <Contact />
       </main>
       <Footer />
