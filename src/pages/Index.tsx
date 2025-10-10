@@ -8,6 +8,7 @@ import ReflectionQuote from "@/components/ReflectionQuote";
 import Gallery from "@/components/Gallery";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
+import ClosingThought from "@/components/ClosingThought";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -25,6 +26,7 @@ const Index = () => {
         <Gallery />
         <Process />
         <Testimonials />
+        <ClosingThought />
         <Contact />
       </main>
       <Footer />
