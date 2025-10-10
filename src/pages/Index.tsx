@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import EmotionalIntro from "@/components/EmotionalIntro";
 import Styles from "@/components/Styles";
+import MyApproach from "@/components/MyApproach";
 import About from "@/components/About";
 import Process from "@/components/Process";
 import Work from "@/components/Work";
@@ -16,6 +17,7 @@ const Index = () => {
         <Hero />
         <EmotionalIntro />
         <Styles />
+        <MyApproach />
         <About />
         <Process />
         <Work />
