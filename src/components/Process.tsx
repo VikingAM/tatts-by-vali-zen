@@ -1,67 +1,90 @@
-import processImage from "@/assets/process-tools.jpg";
+import consultationImage from "@/assets/process-consultation.jpg";
+import designImage from "@/assets/process-design.jpg";
+import executionImage from "@/assets/process-execution.jpg";
+
+const processSteps = [
+  {
+    number: "01",
+    title: "Consultation",
+    description: "Wir sprechen über Ihre Idee. Keine Vorlagen, kein Druck. Nur klare Gedanken.",
+    image: consultationImage,
+    alt: "Black and white photograph of hands in consultation, showing dialogue and trust"
+  },
+  {
+    number: "02",
+    title: "Design",
+    description: "Ich zeichne für Sie. Das Motiv folgt Ihrer Geschichte – nicht umgekehrt.",
+    image: designImage,
+    alt: "Black and white photograph of hands sketching tattoo design with precision"
+  },
+  {
+    number: "03",
+    title: "Execution",
+    description: "Ruhige Konzentration. Präzise Arbeit. Jede Linie sitzt.",
+    image: executionImage,
+    alt: "Black and white photograph of tattoo machine in focused hands working on skin"
+  }
+];
 
 const Process = () => {
-  const steps = [
-    {
-      number: "01",
-      title: "Consultation",
-      description: "Wir sprechen über Ihre Idee. Keine Vorlagen, keine Eile. Nur klare Gedanken.",
-    },
-    {
-      number: "02",
-      title: "Design",
-      description: "Ich zeichne für Sie. Das Design passt sich Ihrem Körper an, nicht umgekehrt.",
-    },
-    {
-      number: "03",
-      title: "Execution",
-      description: "Ruhige Konzentration. Präzise Arbeit. Jede Linie sitzt.",
-    },
-  ];
-
   return (
-    <section id="process" className="py-24 md:py-32">
-      <div className="container mx-auto max-w-5xl px-6">
-        <div className="mb-16">
-          <div className="h-px w-16 bg-accent-bronze mb-8" />
-          <h2 className="text-4xl md:text-5xl font-light mb-6">
+    <section 
+      id="process"
+      aria-label="Tattoo Process – How I Work" 
+      className="py-20 md:py-32 bg-background"
+    >
+      <div className="container mx-auto max-w-7xl px-6">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <div className="mb-6 h-px w-16 bg-accent-bronze mx-auto" />
+          <h2 className="text-3xl md:text-4xl font-light text-foreground mb-4 tracking-wider">
             Process
           </h2>
-          <p className="text-foreground-secondary text-lg max-w-2xl">
-            Drei Schritte. Keine Kompromisse. Nur saubere Arbeit.
+          <p className="text-xl md:text-2xl text-foreground-secondary font-light">
+            Drei Schritte. Keine Kompromisse.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-16">
-          <div className="relative">
-            <img
-              src={processImage}
-              alt="Professional tattoo tools and ink preparation, showcasing precision equipment"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-
-          <div className="space-y-12">
-            {steps.map((step) => (
-              <div key={step.number} className="flex gap-6">
-                <div className="text-bronze text-2xl font-light flex-shrink-0">
-                  {step.number}
-                </div>
-                <div>
-                  <h3 className="text-xl mb-2 font-normal">{step.title}</h3>
-                  <p className="text-foreground-secondary leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+        {/* Process Steps Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 mb-16 md:mb-20">
+          {processSteps.map((step, index) => (
+            <div
+              key={step.number}
+              className="text-center animate-fade-in"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              {/* Step Image */}
+              <div className="mb-6 aspect-square overflow-hidden">
+                <img
+                  src={step.image}
+                  alt={step.alt}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
-            ))}
-          </div>
+
+              {/* Step Number */}
+              <div className="text-accent-bronze text-xl md:text-2xl font-light mb-4 tracking-wider">
+                {step.number}
+              </div>
+
+              {/* Step Title */}
+              <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4 tracking-wide">
+                {step.title}
+              </h3>
+
+              {/* Step Description */}
+              <p className="text-sm md:text-base text-foreground-secondary font-light leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          ))}
         </div>
 
-        <div className="border-t border-border pt-12">
-          <blockquote className="text-2xl md:text-3xl font-light text-foreground-secondary italic max-w-3xl">
-            "Every line tells a story. Make sure yours is worth telling."
+        {/* Tagline */}
+        <div className="text-center border-t border-border pt-12">
+          <blockquote className="text-xl md:text-2xl font-light text-foreground-secondary italic max-w-3xl mx-auto">
+            "Every tattoo is a story — told with precision and silence."
           </blockquote>
         </div>
       </div>
