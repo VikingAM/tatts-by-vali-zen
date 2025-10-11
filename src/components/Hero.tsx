@@ -177,11 +177,17 @@ const Hero = () => {
         .hero-gradient-sweep { background-size: 140% 140%; will-change: background-position; }
         /* Gradient text - always visible with bronze gradient */
         .hero-warm-gradient {
-          color: #B67A4F !important;
-          background: linear-gradient(90deg, #A46B3E 0%, #B67A4F 50%, #A46B3E 100%);
-          -webkit-background-clip: text !important;
-          background-clip: text !important;
-          -webkit-text-fill-color: transparent !important;
+          color: #B67A4F;
+          background: none;
+        }
+        @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+          .hero-warm-gradient {
+            background: linear-gradient(90deg, #A46B3E 0%, #B67A4F 50%, #A46B3E 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+          }
         }
         /* Much subtler sweep with long duration and smaller travel */
         @keyframes headlineSweepWithHold {
