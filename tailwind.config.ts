@@ -57,6 +57,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif'],
+        display: ['"Playfair Display"', 'serif'],
       },
       letterSpacing: {
         'wider-xl': '0.1em',

@@ -12,7 +12,7 @@ const styles = [
   },
   {
     title: "Script",
-    subtitle: "Elegante Schrift. Klare Botschaft.",
+    subtitle: "Klare Botschaft. Elegante Schrift.",
     image: scriptImage,
     alt: "Black and white script lettering tattoo with elegant calligraphic curves"
   },
@@ -50,17 +50,19 @@ const Styles = () => {
                 className="absolute inset-0 w-full h-full object-cover transition-smooth group-hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/40 to-background/70" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/40 to-background/70" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-32 md:h-40 bg-gradient-to-b from-black/50 to-transparent" />
               
               <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
                 <div className="relative">
                   <div className="mb-3 h-px w-12 bg-accent-bronze" />
-                  <h3 className="text-2xl md:text-3xl font-bold text-foreground tracking-wider mb-2">
+                <h3 className="text-3xl md:text-4xl font-semibold text-foreground tracking-wider mb-2">
                     {style.title}
                   </h3>
-                  <p className="text-sm md:text-base text-foreground-secondary font-light">
+                <p className="text-sm md:text-base text-foreground-secondary font-light">
                     {style.subtitle}
                   </p>
+                <div className="mt-2 h-px w-6 bg-accent-bronze opacity-0 transition-smooth group-hover:opacity-100" />
                 </div>
               </div>
             </div>
