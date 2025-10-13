@@ -36,7 +36,7 @@ const AboutSection = () => {
                   Ich bin Valerio. Ich tätowiere seit einigen Jahren in Holderbank. Für mich ist es mehr als ein Beruf – es ist etwas, das mich erfüllt und ruhig macht. Ich mag den Moment, wenn aus einer Idee langsam etwas Echtes entsteht. Etwas, das bleibt und wirklich zu dir passt.
                 </p>
                 <p className="text-[clamp(15px,2.8vw,18px)] leading-[1.9] text-foreground-secondary font-light">
-                  Ich arbeite zuhause in einem privaten Studio. Für jedes Gespräch und jeden Entwurf nehme ich mir Zeit, bis alles stimmt. Qualität entsteht für mich nicht durch Tempo, sondern durch Aufmerksamkeit.
+                  Ich arbeite in einem privaten Studio. Für jedes Gespräch und jeden Entwurf nehme ich mir Zeit, bis alles stimmt. Qualität entsteht für mich nicht durch Tempo, sondern durch Aufmerksamkeit.
                 </p>
                 <p className="text-[clamp(15px,2.8vw,18px)] leading-[1.9] text-foreground-secondary font-light">
                   Wichtig ist mir, dass du dich wohlfühlst. Wenn du mit einem guten Gefühl gehst und dein Tattoo dich glücklich macht, dann hat es sich gelohnt.

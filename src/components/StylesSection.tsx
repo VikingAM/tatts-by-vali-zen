@@ -40,11 +40,11 @@ const styles = [
   },
   {
     id: "stil-symbolik",
-    title: "Symbolik",
+    title: "Micro-Realismus",
     description: "Symbole mit Seele. Bedeutung im Detail. Zeitlos und persönlich.",
     imageSrc: symbolicImg,
-    imageAlt: "Tattoo im Stil Symbolik, geometrisches Symbol auf Schulter.",
-    ariaLabel: "Mehr zum Stil Symbolik"
+    imageAlt: "Tattoo im Stil Micro-Realismus, geometrisches Symbol auf Schulter.",
+    ariaLabel: "Mehr zum Stil Micro-Realismus"
   }
 ];
 
