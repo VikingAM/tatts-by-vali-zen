@@ -160,12 +160,12 @@ export default function GallerySection() {
         />
 
         {/* Leitsatz */}
-        <p className="text-[clamp(15px,3vw,18px)] text-foreground font-light leading-[1.8] max-w-[clamp(50ch,75vw,65ch)] mb-[clamp(8px,2vw,16px)] mx-auto md:mx-0 text-center md:text-left">
+        <p className="text-[clamp(15px,3vw,18px)] text-foreground font-light leading-[1.8] max-w-[clamp(50ch,75vw,65ch)] mb-[clamp(8px,2vw,16px)] text-left">
           Aus deinem Gedanken entsteht etwas, das bleibt.
         </p>
 
         {/* Einleitung */}
-        <p className="text-[clamp(14px,2.8vw,18px)] text-foreground-secondary font-light leading-[1.9] max-w-[clamp(50ch,75vw,65ch)] mb-[clamp(24px,6vw,48px)] mx-auto md:mx-0 text-center md:text-left">
+        <p className="text-[clamp(14px,2.8vw,18px)] text-foreground-secondary font-light leading-[1.9] max-w-[clamp(50ch,75vw,65ch)] mb-[clamp(24px,6vw,48px)] text-left">
           Du bringst die Idee, ich höre zu. Gemeinsam finden wir Motiv, Größe und Platz. Präzise gestochen, langlebig und mit Raum für deine Geschichte.
         </p>
 

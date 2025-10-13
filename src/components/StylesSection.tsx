@@ -166,7 +166,7 @@ const StylesSection: React.FC = () => {
           />
 
           {/* Intro paragraphs */}
-          <div className="text-[clamp(14px,2.8vw,18px)] text-foreground-secondary font-light leading-[1.9] max-w-[clamp(50ch,75vw,65ch)] mb-[clamp(24px,6vw,40px)] space-y-[clamp(4px,1vw,6px)]">
+          <div className="text-[clamp(14px,2.8vw,18px)] text-foreground-secondary font-light leading-[1.9] max-w-[clamp(50ch,75vw,65ch)] mb-[clamp(24px,6vw,40px)] space-y-[clamp(4px,1vw,6px)] text-left">
             {intro.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}

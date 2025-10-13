@@ -152,7 +152,7 @@ const Contact = () => {
               />
 
               {/* Lead-Text */}
-              <p className="text-[clamp(14px,2.8vw,18px)] text-foreground-secondary font-light leading-[1.9] max-w-[clamp(50ch,75vw,65ch)] mb-[clamp(24px,6vw,48px)]">
+              <p className="text-[clamp(14px,2.8vw,18px)] text-foreground-secondary font-light leading-[1.9] max-w-[clamp(50ch,75vw,65ch)] mb-[clamp(24px,6vw,48px)] text-left">
                 Du bringst die Idee, ich höre zu. Gemeinsam entwickeln wir dein Tattoo – von der ersten Skizze bis zur finalen Ausführung.
               </p>
             </div>
