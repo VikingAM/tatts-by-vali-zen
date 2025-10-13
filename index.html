@@ -21,9 +21,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Fonts with display=swap for better performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Fonts with display=swap for better performance - Only used weights -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 
     <meta property="og:title" content="Precision with Soul" />
     <meta property="og:description" content="Precision with Soul: Feine Linien, klare Form – deine Geschichte. Sorgfältig entwickelt, präzise gestochen, mit Zeit für jedes Detail." />
@@ -107,6 +107,28 @@
 
     <!-- Preload critical hero assets -->
     <link rel="preload" as="image" href="/src/assets/Banner.png" type="image/png">
+    
+    <!-- Critical CSS for hero section -->
+    <style>
+      /* Critical hero styles for faster LCP */
+      #hero {
+        position: relative;
+        background: #000;
+        min-height: 500px;
+      }
+      #hero img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hero-heading {
+        font-family: 'Playfair Display', serif;
+        font-weight: 300;
+        color: #B47A4E;
+      }
+    </style>
   </head>
 
   <body>

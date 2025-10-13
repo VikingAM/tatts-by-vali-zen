@@ -150,6 +150,29 @@
 }
 
 /* ============================================
+   Mobile Performance Optimizations
+   ============================================ */
+
+/* Mobile-first optimizations */
+@media (max-width: 768px) {
+  #hero {
+    min-height: 500px;
+    /* Reduce complexity for mobile */
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+  }
+  
+  /* Faster animations on mobile */
+  .hero-eyebrow,
+  .hero-heading,
+  .hero-line,
+  .hero-line-top,
+  .hero-line-bottom {
+    animation-duration: 0.2s;
+    animation-delay: 0.1s;
+  }
+}
+
+/* ============================================
    Accessibility - Reduced Motion
    ============================================ */
 @media (prefers-reduced-motion: reduce) {

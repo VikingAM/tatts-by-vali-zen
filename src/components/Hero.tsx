@@ -9,15 +9,27 @@ const Hero = () => {
       aria-labelledby="hero-heading"
       className="relative h-[clamp(600px,85vh,900px)] w-full flex items-center justify-center bg-black text-left overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-black/30 before:pointer-events-none before:z-[1]"
     >
-      {/* Background Image - Optimized responsive Banner.png */}
+      {/* Background Image - Mobile-optimized responsive Banner.png */}
       <picture>
+        <source
+          type="image/webp"
+          srcSet={`
+            ${heroJpg}?w=480&q=75&f=webp 480w,
+            ${heroJpg}?w=640&q=80&f=webp 640w,
+            ${heroJpg}?w=768&q=85&f=webp 768w,
+            ${heroJpg}?w=1024&q=85&f=webp 1024w,
+            ${heroJpg}?w=1920&q=90&f=webp 1920w
+          `}
+          sizes="100vw"
+        />
         <source
           type="image/png"
           srcSet={`
-            ${heroJpg}?w=640&q=85 640w,
-            ${heroJpg}?w=768&q=85 768w,
+            ${heroJpg}?w=480&q=70 480w,
+            ${heroJpg}?w=640&q=75 640w,
+            ${heroJpg}?w=768&q=80 768w,
             ${heroJpg}?w=1024&q=85 1024w,
-            ${heroJpg}?w=1920&q=85 1920w
+            ${heroJpg}?w=1920&q=90 1920w
           `}
           sizes="100vw"
         />
@@ -29,7 +41,7 @@ const Hero = () => {
           decoding="async"
           fetchPriority="high"
           width="1920"
-          height="1280"
+          height="1080"
         />
       </picture>
 
