@@ -1,5 +1,6 @@
-// Banner.png als neues Hero Bild
-import heroJpg from "@/assets/Banner.png";
+// Hero images - WebP with fallback
+import heroWebp from "@/assets/hero-tattoo-hands.webp";
+import heroJpg from "@/assets/hero-tattoo-hands.jpg";
 import "@/styles/hero.css";
 
 const Hero = () => {
@@ -7,19 +8,26 @@ const Hero = () => {
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative h-screen w-full flex items-center justify-center bg-black text-left overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-black/30 before:pointer-events-none before:z-[1]"
+      className="relative h-[clamp(600px,85vh,900px)] w-full flex items-center justify-center bg-black text-left overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-black/30 before:pointer-events-none before:z-[1]"
     >
-      {/* Background Image */}
-      <img
-        src={heroJpg}
-        alt="Tattoo artist working on Tattsbyvali script tattoo – professionelle Tattoo-Sitzung mit moderner Maschine"
-        className="absolute inset-0 w-full h-full object-cover brightness-[0.9] contrast-[1.2]"
-        loading="eager"
-        decoding="async"
-        fetchPriority="high"
-        width="1920"
-        height="1080"
-      />
+      {/* Background Image - Responsive with WebP */}
+      <picture>
+        <source
+          type="image/webp"
+          srcSet={`${heroWebp} 640w, ${heroWebp} 1024w, ${heroWebp} 1920w`}
+          sizes="100vw"
+        />
+        <img
+          src={heroJpg}
+          alt="Tattoo artist working on Tattsbyvali script tattoo – professionelle Tattoo-Sitzung mit moderner Maschine"
+          className="absolute inset-0 w-full h-full object-cover brightness-[0.9] contrast-[1.2]"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          width="1920"
+          height="1280"
+        />
+      </picture>
 
       {/* Additional gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-[1]" />

@@ -101,18 +101,12 @@
    Responsive Adjustments
    ============================================ */
 
-/* Tablet adjustments */
-@media (max-width: 1024px) {
-  #hero {
-    height: 85vh;
-    min-height: 600px;
-  }
-}
+/* Height constraints are now handled via clamp() in the component
+   These media queries remain for additional mobile optimizations */
 
 /* Mobile adjustments - Optimized for smoother animations */
 @media (max-width: 768px) {
   #hero {
-    height: 75vh;
     min-height: 500px;
   }
   
