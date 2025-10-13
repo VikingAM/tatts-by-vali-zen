@@ -101,12 +101,18 @@
    Responsive Adjustments
    ============================================ */
 
-/* Height constraints are now handled via clamp() in the component
-   These media queries remain for additional mobile optimizations */
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+  #hero {
+    height: 85vh;
+    min-height: 600px;
+  }
+}
 
 /* Mobile adjustments - Optimized for smoother animations */
 @media (max-width: 768px) {
   #hero {
+    height: 75vh;
     min-height: 500px;
   }
   
@@ -155,5 +161,33 @@
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* FOUC Protection - WICHTIG für LCP */
+[data-js="loading"] #hero .hero-eyebrow,
+[data-js="loading"] #hero .hero-heading,
+[data-js="loading"] #hero .hero-line,
+[data-js="loading"] #hero .hero-line-top,
+[data-js="loading"] #hero .hero-line-bottom {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Optimierte Animationen für Mobile */
+@media (max-width: 768px) {
+  .hero-eyebrow,
+  .hero-heading,
+  .hero-line,
+  .hero-line-top,
+  .hero-line-bottom {
+    animation-duration: 0.3s; /* Schnellere Animationen */
+    animation-delay: 0.1s; /* Kürzere Delays */
+  }
+  
+  #hero {
+    min-height: 500px;
+    /* Reduziere Komplexität für Mobile */
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
   }
 }

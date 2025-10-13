@@ -1,4 +1,4 @@
-// Hero images - WebP with fallback
+// Hero images - WebP with fallback for optimal performance
 import heroWebp from "@/assets/hero-tattoo-hands.webp";
 import heroJpg from "@/assets/hero-tattoo-hands.jpg";
 import "@/styles/hero.css";
@@ -10,16 +10,31 @@ const Hero = () => {
       aria-labelledby="hero-heading"
       className="relative h-[clamp(600px,85vh,900px)] w-full flex items-center justify-center bg-black text-left overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-black/30 before:pointer-events-none before:z-[1]"
     >
-      {/* Background Image - Responsive with WebP */}
+      {/* Background Image - Optimized responsive with WebP */}
       <picture>
         <source
           type="image/webp"
-          srcSet={`${heroWebp} 640w, ${heroWebp} 1024w, ${heroWebp} 1920w`}
+          srcSet={`
+            ${heroWebp}?w=640&q=85 640w,
+            ${heroWebp}?w=768&q=85 768w,
+            ${heroWebp}?w=1024&q=85 1024w,
+            ${heroWebp}?w=1920&q=85 1920w
+          `}
+          sizes="100vw"
+        />
+        <source
+          type="image/jpeg"
+          srcSet={`
+            ${heroJpg}?w=640&q=85 640w,
+            ${heroJpg}?w=768&q=85 768w,
+            ${heroJpg}?w=1024&q=85 1024w,
+            ${heroJpg}?w=1920&q=85 1920w
+          `}
           sizes="100vw"
         />
         <img
           src={heroJpg}
-          alt="Tattoo artist working on Tattsbyvali script tattoo – professionelle Tattoo-Sitzung mit moderner Maschine"
+          alt="Valerio arbeitet professionell an einem Tattoo mit moderner Maschine – präzise Handarbeit im privaten Studio"
           className="absolute inset-0 w-full h-full object-cover brightness-[0.9] contrast-[1.2]"
           loading="eager"
           decoding="async"
