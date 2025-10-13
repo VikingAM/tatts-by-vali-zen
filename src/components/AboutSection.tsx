@@ -12,19 +12,19 @@ const AboutSection = () => {
       aria-labelledby="about-heading"
       className="pt-[clamp(64px,15vw,144px)] pb-[clamp(64px,15vw,128px)] bg-background scroll-mt-28 md:scroll-mt-36 relative"
     >
-      {/* Bronze Trennlinie oben */}
-      <div className="border-t border-accent-bronze/20" aria-hidden="true" />
       
       <div className="container mx-auto max-w-[clamp(320px,95vw,1280px)] px-[clamp(16px,4vw,24px)]">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <header className="text-center md:text-left mb-[clamp(32px,8vw,64px)]">
-            <p className="text-[clamp(12px,2.5vw,14px)] tracking-[0.15em] uppercase text-accent-bronze/95 mb-2 md:mb-3 font-medium">
+            <p className="text-[clamp(12px,2.5vw,14px)] tracking-[0.15em] uppercase text-accent-bronze/95 mb-4 md:mb-6 font-medium">
               JEDE LINIE BEGINNT MIT VERTRAUEN.
             </p>
-            <h2 id="about-heading" className="text-[clamp(28px,6vw,42px)] font-light text-foreground leading-[1.2]">
+            <h2 id="about-heading" className="text-[clamp(28px,6vw,42px)] font-light text-foreground leading-[1.2] mb-7">
               Über mich
             </h2>
+            {/* Bronze Trennlinie unter Titel */}
+            <div className="h-[2px] w-16 bg-accent-bronze/90 mb-7 mx-auto md:mx-0" aria-hidden="true" />
           </header>
 
           {/* Content Grid */}
