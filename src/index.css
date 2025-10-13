@@ -17,6 +17,10 @@ All colors MUST be HSL.
     /* Bronze accent - used sparingly */
     --accent-bronze: 24 46% 44%; /* #A46B3E */
     --accent-bronze-foreground: 0 0% 96%;
+    
+    /* Brand Color Token - Mobile Menu */
+    --brand: #b37a3c;
+    --brand-rgb: 179, 122, 60;
 
     --card: 0 0% 10%;
     --card-foreground: 0 0% 96%;
@@ -76,22 +80,101 @@ All colors MUST be HSL.
     border-color: hsl(var(--accent-bronze));
   }
 
+  /* Touch fallback utilities for hover effects */
+  @media (hover: none) {
+    .touch-hover\:active {
+      /* Empty class holder for touch hover fallbacks */
+    }
+  }
+
+  /* CTA Button Mobile Optimierungen */
   .transition-smooth {
     transition: var(--transition-smooth);
   }
-
-  .animate-fade-in {
-    animation: fadeIn 250ms ease-out;
+  
+  /* Will-change nur bei tatsächlicher Animation */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-auto {
+    will-change: auto;
   }
 
-  @keyframes fadeIn {
+  /* Touch-Geräte: Bessere Active-States */
+  @media (hover: none) and (pointer: coarse) {
+    .transition-smooth:active {
+      transform: scale(0.98);
+      transition: transform 100ms ease, box-shadow 100ms ease;
+    }
+  }
+
+  /* Desktop: Hover + Active kombinieren */
+  @media (hover: hover) and (pointer: fine) {
+    .transition-smooth:hover {
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .transition-smooth:active {
+      transform: scale(0.98);
+      transition: transform 100ms ease;
+    }
+  }
+
+  /* Reduced Motion: Animationen respektieren */
+  @media (prefers-reduced-motion: reduce) {
+    .transition-smooth {
+      transition: none !important;
+    }
+    
+    .transition-smooth:active {
+      transform: none !important;
+    }
+  }
+
+  /* Fade-in animation with customizable delay */
+  .animate-fade-in {
+    opacity: 0;
+    animation: fade-in-up 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  
+  /* Mobile-optimized fade-in animation */
+  @media (max-width: 768px) {
+    .animate-fade-in {
+      animation-duration: 0.6s;
+      animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
     }
   }
 }
@@ -157,5 +240,489 @@ All colors MUST be HSL.
   /* Hide indicator on very short viewports */
   @media (max-height: 600px) {
     .hide-on-short-vh { display: none; }
+  }
+
+  /* Mobile Menu Styles */
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Respect reduced motion for mobile menu */
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu {
+      animation: none !important;
+    }
+  }
+
+  /* Favicon Optimization - Maximale Größe und Schärfe */
+  link[rel="icon"] {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+  }
+
+  /* Browser-spezifische Favicon-Optimierung */
+  @supports (image-rendering: -webkit-optimize-contrast) {
+    link[rel="icon"] {
+      image-rendering: -webkit-optimize-contrast;
+    }
+  }
+
+  /* Mobile Menu - Veredelt nach Spezifikation */
+  .mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 180ms ease-out;
+    /* Touch-optimization */
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-menu-panel {
+    position: absolute;
+    top: max(20px, env(safe-area-inset-top));
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100vw - 32px), 400px);
+    background: rgba(18, 18, 18, 0.95);
+    border: 1px solid #262626;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    animation: slideIn 220ms ease-out;
+    padding: 16px 24px;
+    /* Touch-optimization */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .mobile-menu-logo {
+    height: 32px;
+    width: auto;
+    filter: hue-rotate(0deg) saturate(1.2);
+  }
+
+  .mobile-menu-close {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: var(--foreground);
+    font-size: 24px;
+    line-height: 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 150ms ease;
+    cursor: pointer;
+  }
+
+  .mobile-menu-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--brand);
+  }
+
+  .mobile-menu-close:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .mobile-menu-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-menu-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-menu-link {
+    display: block;
+    width: 100%;
+    padding: 14px 0;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: var(--foreground);
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: color 150ms ease;
+    border-radius: 8px;
+    /* Touch-optimization */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .mobile-menu-link:hover,
+  .mobile-menu-link:focus-visible {
+    color: var(--brand);
+    outline: none;
+  }
+  
+  .mobile-menu-link:active {
+    transform: scale(0.98);
+    transition: transform 100ms ease, color 150ms ease;
+  }
+
+  .mobile-menu-link:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .mobile-menu-divider {
+    height: 1px;
+    background: #262626;
+    margin: 12px 0;
+    border: none;
+  }
+
+  .mobile-menu-cta {
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  /* Mobile Menu CTA - Touch-optimiert */
+  .mobile-menu-cta button {
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu-cta button:active {
+    transform: scale(0.98);
+    transition: transform 100ms ease, box-shadow 100ms ease;
+  }
+
+  /* Touch-Geräte: Stärkeres Feedback */
+  @media (hover: none) and (pointer: coarse) {
+    .mobile-menu-cta button:active {
+      background: rgba(164, 107, 62, 0.2) !important;
+      box-shadow: 0 0 16px rgba(164, 107, 62, 0.8) !important;
+      transform: scale(0.97);
+    }
+  }
+  
+  /* Mobile Performance Optimierungen */
+  @media (max-width: 768px) {
+    /* Reduzierte Animationen für schwächere Geräte */
+    .transition-smooth {
+      transition-duration: 150ms;
+      transition-property: transform, box-shadow, background-color, color;
+    }
+    
+    /* Will-change nur bei tatsächlicher Interaktion - HOVER AKTIVIERT! */
+    .transition-smooth:hover,
+    .transition-smooth:active {
+      will-change: transform;
+    }
+    
+    .transition-smooth:not(:hover):not(:active) {
+      will-change: auto;
+    }
+    
+    /* Konflikt-Vermeidung zwischen verschiedenen Animationen */
+    .animate-fade-in.transition-smooth {
+      transition-property: opacity, transform;
+      transition-duration: 0.6s;
+    }
+    
+    /* Mobile-spezifische Animation-Prioritäten */
+    .transition-smooth:has(.animate-fade-in) {
+      transition-delay: 0ms;
+    }
+    
+    /* Mobile Breakpoint - Hover-Effekte werden von universellen Klassen übernommen */
+  }
+  
+  /* Low-end Device Optimierung */
+  @media (max-width: 768px) and (max-resolution: 2dppx) {
+    .transition-smooth {
+      transition-duration: 100ms;
+    }
+    
+    .animate-fade-in {
+      animation-duration: 0.6s;
+    }
+  }
+  
+  /* ============================================
+     TOUCH-ANIMATIONEN FÜR MOBILE - VOLLSTÄNDIG ÜBERARBEITET
+     ============================================ */
+  
+  /* Touch-Optimierungen für alle interaktiven Elemente */
+  .testimonial-card,
+  .gallery-card,
+  .style-card,
+  .cta-button {
+    /* touch-action: manipulation; ← ENTFERNT: Verhinderte Hover-Events! */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    min-height: 44px; /* Accessibility Touch Target */
+  }
+
+@layer utilities {
+  /* Universelle Hover-Effekte für alle Geräte mit Maus - MAXIMALE SPEZIFITÄT */
+  .testimonial-card.testimonial-card.testimonial-card:hover {
+    transform: scale(1.005) translateY(-4px) !important; /* -translate-y-1 = 4px */
+    box-shadow: 0 0 12px rgba(164,107,62,0.3), 0 8px 25px rgba(0,0,0,0.4) !important;
+    border: 2px solid rgba(164, 107, 62, 0.6) !important; /* border statt ring */
+    transition: all 300ms ease-out !important; /* transition hinzufügen */
+  }
+
+  .gallery-card.gallery-card.gallery-card:hover {
+    transform: scale(1.02) !important;
+    box-shadow: 0 0 32px rgba(164,107,62,0.8), 0 20px 50px rgba(0,0,0,0.5) !important;
+    border: 2px solid hsl(var(--accent-bronze)) !important;
+    transition: all 300ms ease-out !important;
+  }
+
+  .style-card.style-card.style-card:hover {
+    transform: scale(1.01) !important;
+    box-shadow: 0 0 16px rgba(164,107,62,0.35), 0 15px 40px rgba(0,0,0,0.45) !important;
+    border: 2px solid rgba(164, 107, 62, 0.6) !important;
+    transition: all 300ms ease-out !important;
+  }
+
+  .cta-button:hover {
+    /* Hover-Effekte werden vom CTAButton Component definiert */
+  }
+
+  /* Touch-Animationen für ALLE Geräte (inkl. Dev Tools Mobile Viewport) */
+  .testimonial-card:active {
+    animation: touchPulseCard 300ms ease-out forwards !important;
+  }
+
+  .style-card:active {
+    animation: touchPulseCard 300ms ease-out forwards !important;
+  }
+
+  .gallery-card:active {
+    animation: touchPulseGallery 300ms ease-out forwards !important;
+  }
+
+  .cta-button:active {
+    animation: touchPulseButton 200ms ease-out forwards !important;
+  }
+}
+
+/* Keyframes für Touch-Feedback Animationen - KORRIGIERT */
+@keyframes touchPulseCard {
+  0% { 
+    transform: scale(1) translateY(0);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  }
+  50% { 
+    transform: scale(1.02) translateY(-2px);
+    border: 2px solid rgba(164, 107, 62, 0.8);
+    box-shadow: 0 0 16px rgba(164,107,62,0.5), 0 8px 25px rgba(0,0,0,0.4);
+  }
+  100% { 
+    transform: scale(1) translateY(0);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  }
+}
+
+@keyframes touchPulseGallery {
+  0% { 
+    transform: scale(1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  }
+  50% { 
+    transform: scale(1.02);
+    border: 2px solid hsl(var(--accent-bronze));
+    box-shadow: 0 0 32px rgba(164,107,62,0.8), 0 20px 50px rgba(0,0,0,0.5);
+  }
+  100% { 
+    transform: scale(1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  }
+}
+  
+  @keyframes touchPulseButton {
+    0% { 
+      transform: scale(1);
+      background: transparent;
+      box-shadow: none;
+    }
+    50% { 
+      transform: scale(0.98);
+      background: rgba(164, 107, 62, 0.2);
+      box-shadow: 0 0 16px rgba(164, 107, 62, 0.8);
+    }
+    100% { 
+      transform: scale(1);
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+  
+  /* Touch-Geräte: Nur Touch-Animation, KEINE Hover-Effekte */
+  @media (hover: none) and (pointer: coarse) {
+    /* Testimonial Cards Touch-Feedback */
+    .testimonial-card:active {
+      animation: touchPulseCard 300ms ease-out;
+    }
+    
+    /* Gallery Cards Touch-Feedback */
+    .gallery-card:active {
+      animation: touchPulseGallery 300ms ease-out;
+    }
+    
+    /* Style Cards Touch-Feedback */
+    .style-card:active {
+      animation: touchPulseCard 300ms ease-out;
+    }
+    
+    /* CTA Buttons Touch-Feedback */
+    .cta-button:active {
+      animation: touchPulseButton 200ms ease-out;
+    }
+    
+    /* Mobile Menu CTA Button - Touch-Feedback mit höherer Spezifität */
+    .mobile-menu-cta .cta-button:active {
+      animation: touchPulseButton 200ms ease-out !important;
+    }
+    
+    /* HOVER-EFFEKTE FÜR TOUCH-GERÄTE DEAKTIVIEREN */
+    .testimonial-card.testimonial-card.testimonial-card:hover,
+    .gallery-card.gallery-card.gallery-card:hover,
+    .style-card.style-card.style-card:hover,
+    .cta-button:hover {
+      /* Hover-Effekte werden für Touch-Geräte deaktiviert */
+      transform: none !important;
+      box-shadow: none !important;
+      border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+  }
+  
+  /* Mobile Menu CTA Button - Zusätzliche Sicherheit für Touch-Animation */
+  .mobile-menu-panel .mobile-menu-cta .cta-button:active {
+    animation: touchPulseButton 200ms ease-out !important;
+  }
+  
+  /* Focus-States für alle Karten (Keyboard Navigation) */
+  .testimonial-card:focus-visible,
+  .gallery-card:focus-visible,
+  .style-card:focus-visible {
+    outline: 2px solid hsl(var(--accent-bronze));
+    outline-offset: 2px;
+    border: 2px solid rgba(164, 107, 62, 0.8);
+    box-shadow: 0 0 16px rgba(164,107,62,0.5), 0 8px 25px rgba(0,0,0,0.4);
+    transform: scale(1.02) translateY(-2px);
+  }
+
+
+  .mobile-menu-subline {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #262626;
+    text-align: center;
+    font-size: 13px;
+    color: #9a9a9a;
+    line-height: 1.4;
+    letter-spacing: 0.1px;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { 
+      opacity: 0;
+      transform: translateX(-50%) translateY(-12px) scale(0.98);
+    }
+    to { 
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+  }
+  
+  /* Mobile-optimized animations */
+  @media (max-width: 768px) {
+    .mobile-menu-overlay {
+      animation: fadeIn 120ms ease-out;
+    }
+    
+    .mobile-menu-panel {
+      animation: slideIn 180ms ease-out;
+    }
+    
+    @keyframes slideIn {
+      from { 
+        opacity: 0;
+        transform: translateX(-50%) translateY(-8px) scale(0.95);
+      }
+      to { 
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+    }
+  }
+
+  /* Focus Trap */
+  .mobile-menu-overlay:focus-within {
+    outline: none;
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu-overlay,
+    .mobile-menu-panel,
+    .mobile-menu-close,
+    .mobile-menu-link,
+    .mobile-menu-cta-button {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* High Contrast Mode */
+  @media (prefers-contrast: high) {
+    .mobile-menu-panel {
+      border: 2px solid var(--foreground);
+    }
+    
+    .mobile-menu-close:focus-visible,
+    .mobile-menu-link:focus-visible,
+    .mobile-menu-cta-button:focus-visible {
+      outline: 3px solid var(--foreground);
+    }
   }
 }

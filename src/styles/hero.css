@@ -1,0 +1,165 @@
+/**
+ * Clean Hero Section Styles
+ * Minimal, elegant animations for the hero section
+ * Optimized for performance and maintainability
+ */
+
+/* ============================================
+   FOUC Protection
+   ============================================ */
+[data-js="loading"] #hero .hero-eyebrow,
+[data-js="loading"] #hero .hero-heading,
+[data-js="loading"] #hero .hero-line,
+[data-js="loading"] #hero .hero-line-top,
+[data-js="loading"] #hero .hero-line-bottom {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* ============================================
+   Animation Keyframes
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lineDrawIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================
+   Hero Elements - Entrance Animations
+   ============================================ */
+
+/* Eyebrow animation */
+.hero-eyebrow {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s forwards;
+}
+
+/* Bronze line above heading - draw in from left */
+.hero-line-top {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: lineDrawIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s forwards;
+}
+
+/* Main heading animation */
+.hero-heading {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s forwards;
+}
+
+/* Bronze line below heading - draw in from left */
+.hero-line-bottom {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: lineDrawIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.7s forwards;
+}
+
+/* Statement lines animation */
+.hero-line {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.hero-line:nth-child(1) {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.9s forwards;
+}
+
+.hero-line:nth-child(2) {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 1.1s forwards;
+}
+
+.hero-line:nth-child(3) {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 1.3s forwards;
+}
+
+.hero-line:nth-child(4) {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 1.5s forwards;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+  #hero {
+    height: 85vh;
+    min-height: 600px;
+  }
+}
+
+/* Mobile adjustments - Optimized for smoother animations */
+@media (max-width: 768px) {
+  #hero {
+    height: 75vh;
+    min-height: 500px;
+  }
+  
+  .hero-eyebrow {
+    animation-delay: 0.2s;
+  }
+  
+  .hero-line-top {
+    animation-delay: 0.4s;
+  }
+  
+  .hero-heading {
+    animation-delay: 0.6s;
+  }
+  
+  .hero-line-bottom {
+    animation-delay: 0.8s;
+  }
+  
+  .hero-line:nth-child(1) {
+    animation-delay: 1.0s;
+  }
+  
+  .hero-line:nth-child(2) {
+    animation-delay: 1.3s;
+  }
+  
+  .hero-line:nth-child(3) {
+    animation-delay: 1.6s;
+  }
+  
+  .hero-line:nth-child(4) {
+    animation-delay: 1.9s;
+  }
+}
+
+/* ============================================
+   Accessibility - Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow,
+  .hero-heading,
+  .hero-line,
+  .hero-line-top,
+  .hero-line-bottom {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

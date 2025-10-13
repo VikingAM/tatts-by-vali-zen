@@ -1,29 +1,118 @@
 <!doctype html>
-<html lang="en">
+<html lang="de" data-js="loading">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tatts by Vali – Precision with Soul</title>
-    <meta name="description" content="Swiss tattoo artistry. Every line tells a story. Monochrome craftsmanship in Zurich." />
+    <title>Precision with Soul – Tatts by Vali</title>
+    <meta name="description" content="Precision with Soul: Feine Linien, klare Form – deine Geschichte. Sorgfältig entwickelt, präzise gestochen, mit Zeit für jedes Detail." />
     <meta name="author" content="Tatts by Vali" />
     
+    <!-- Favicon Links - Optimiert für maximale Größe -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Font Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts with display=swap for better performance -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
-    <meta property="og:title" content="Tatts by Vali – Precision with Soul" />
-    <meta property="og:description" content="Swiss tattoo artistry. Every line tells a story." />
+    <meta property="og:title" content="Precision with Soul" />
+    <meta property="og:description" content="Precision with Soul: Feine Linien, klare Form – deine Geschichte. Sorgfältig entwickelt, präzise gestochen, mit Zeit für jedes Detail." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content="/android-chrome-512x512.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Precision with Soul" />
+    <meta name="twitter:description" content="Precision with Soul: Feine Linien, klare Form – deine Geschichte. Sorgfältig entwickelt, präzise gestochen, mit Zeit für jedes Detail." />
     <meta name="twitter:site" content="@tattsbyvali" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:image" content="/android-chrome-512x512.png" />
+
+    <!-- JSON-LD Structured Data for TattooParlor -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TattooParlor",
+      "name": "Tatts by Vali",
+      "url": "https://tattsbyvali.ch",
+      "logo": "https://tattsbyvali.ch/android-chrome-512x512.png",
+      "image": "https://tattsbyvali.ch/android-chrome-512x512.png",
+      "description": "Precision with Soul: Feine Linien, klare Form – deine Geschichte. Sorgfältig entwickelt, präzise gestochen, mit Zeit für jedes Detail.",
+      "email": "vali@tattsbyvali.ch",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Schulhausstrasse 15",
+        "postalCode": "5113",
+        "addressLocality": "Holderbank",
+        "addressCountry": "CH"
+      },
+      "sameAs": [
+        "https://www.instagram.com/tatts_byvali/"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Valerio Seratore"
+      },
+      "priceRange": "$$"
+    }
+    </script>
+
+    <!-- JSON-LD BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Start",
+          "item": "https://tattsbyvali.ch/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Über mich",
+          "item": "https://tattsbyvali.ch/#ueber-mich"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Stile",
+          "item": "https://tattsbyvali.ch/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Galerie",
+          "item": "https://tattsbyvali.ch/#gallery"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Kontakt",
+          "item": "https://tattsbyvali.ch/#contact"
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.addEventListener("load", () => {
+        document.documentElement.setAttribute("data-js", "ready");
+      });
+    </script>
   </body>
 </html>

@@ -45,6 +45,8 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
           bronze: "hsl(var(--accent-bronze))",
+          bronze400: "hsl(var(--accent-bronze-400))",
+          bronze450: "hsl(var(--accent-bronze-450))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",

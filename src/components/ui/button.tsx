@@ -1,47 +1,81 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import React from "react";
+import { ArrowRight, Instagram } from "lucide-react";
+import clsx from "clsx";
 
-import { cn } from "@/lib/utils";
+type Variant = "primary" | "outline" | "ghost";
+type Icon = "arrow" | "instagram" | "none";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-);
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
+  href?: string;
+  children: React.ReactNode;
+  variant?: Variant;
+  icon?: Icon;
+  external?: boolean;
+  className?: string;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
-  },
-);
-Button.displayName = "Button";
+/**
+ * Button Component
+ * Unified CTA component with consistent styling across the site
+ * Supports primary, outline, and ghost variants with optional icons
+ */
+export function Button({
+  href,
+  children,
+  variant = "primary",
+  icon = "none",
+  external = false,
+  className,
+  ...rest
+}: ButtonProps) {
+  const base =
+    "inline-flex items-center gap-2 rounded-xl px-5 py-2 text-sm tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-accent-bronze focus-visible:ring-offset-background";
+  
+  const variants = {
+    primary:
+      "bg-accent-bronze text-background hover:bg-accent-bronze/90 border border-accent-bronze",
+    outline:
+      "border border-accent-bronze text-accent-bronze hover:bg-accent-bronze/10",
+    ghost:
+      "text-accent-bronze hover:text-accent-bronze/90",
+  };
 
-export { Button, buttonVariants };
+  const IconEl =
+    icon === "arrow" ? (
+      <ArrowRight size={16} aria-hidden="true" />
+    ) : icon === "instagram" ? (
+      <Instagram size={16} aria-hidden="true" />
+    ) : null;
+
+  // If href is provided, render as anchor
+  if (href) {
+    const linkProps = external
+      ? { target: "_blank", rel: "noopener noreferrer" }
+      : {};
+
+    return (
+      <a
+        href={href}
+        className={clsx(base, variants[variant], className)}
+        {...linkProps}
+        {...(rest as any)}
+      >
+        {IconEl && icon === "instagram" ? IconEl : null}
+        <span>{children}</span>
+        {IconEl && icon === "arrow" ? IconEl : null}
+      </a>
+    );
+  }
+
+  // Otherwise render as button
+  return (
+    <button
+      className={clsx(base, variants[variant], className)}
+      {...rest}
+    >
+      {IconEl && icon === "instagram" ? IconEl : null}
+      <span>{children}</span>
+      {IconEl && icon === "arrow" ? IconEl : null}
+    </button>
+  );
+}

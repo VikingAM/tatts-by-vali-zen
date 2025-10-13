@@ -1,0 +1,29 @@
+/**
+ * Design Tokens
+ * Centralized color system for brand consistency
+ * Monochrome palette with bronze accents
+ */
+
+:root {
+  /* Bronze accent colors */
+  --bronze-400: #A46B3E;
+  --bronze-450: #AE7449;
+  --bronze-500: #B67A4F;
+  --bronze-lighter: #BE8454;
+
+  /* Base colors */
+  --bg: #0b0b0b;
+  --fg: #e9e3d9;
+  --fg-2: #e6e0d6;
+  --fg-secondary: rgba(233, 227, 217, 0.85);
+
+  /* Semantic color mappings for Tailwind */
+  --background: 0 0% 4%;
+  --foreground: 40 23% 88%;
+  --foreground-secondary: 38 22% 86%;
+  
+  --accent-bronze: 24 49% 48%;
+  --accent-bronze-400: 24 45% 43%;
+  --accent-bronze-450: 24 47% 46%;
+}
+
