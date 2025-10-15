@@ -76,6 +76,9 @@ export default function GallerySection() {
   const [visible, setVisible] = useState<boolean[]>(
     new Array(ITEMS.length).fill(true)
   );
+  const [hovered, setHovered] = useState<boolean[]>(
+    new Array(ITEMS.length).fill(false)
+  );
   const refs = useRef<(HTMLElement | null)[]>([]);
   const prefersReducedMotion = useRef(false);
 
@@ -91,7 +94,7 @@ export default function GallerySection() {
     }
 
     // IntersectionObserver for scroll animations
-    const obs = new IntersectionObserver(
+    const visibilityObs = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -102,7 +105,7 @@ export default function GallerySection() {
                 copy[idx] = true;
                 return copy;
               });
-              obs.unobserve(entry.target);
+              visibilityObs.unobserve(entry.target);
             }
           }
         });
@@ -110,15 +113,42 @@ export default function GallerySection() {
       { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.15 }
     );
 
+    // IntersectionObserver for hover effect on mobile (when image is centered in viewport)
+    const hoverObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const idx = refs.current.indexOf(entry.target as HTMLElement);
+          if (idx !== -1) {
+            setHovered((prev) => {
+              const copy = [...prev];
+              copy[idx] = entry.isIntersecting && entry.intersectionRatio > 0.5;
+              return copy;
+            });
+          }
+        });
+      },
+      { 
+        root: null, 
+        rootMargin: "-25% 0px -25% 0px", // Trigger when image is in the middle 50% of viewport
+        threshold: [0, 0.25, 0.5, 0.75, 1] 
+      }
+    );
+
     // Observe elements with proper cleanup
-    refs.current.forEach((el) => el && obs.observe(el));
+    refs.current.forEach((el) => {
+      if (el) {
+        visibilityObs.observe(el);
+        hoverObs.observe(el);
+      }
+    });
     
     return () => {
-      obs.disconnect();
-      // Additional cleanup for mobile performance
+      visibilityObs.disconnect();
+      hoverObs.disconnect();
       refs.current.forEach((el) => {
         if (el) {
-          obs.unobserve(el);
+          visibilityObs.unobserve(el);
+          hoverObs.unobserve(el);
         }
       });
     };
@@ -183,7 +213,9 @@ export default function GallerySection() {
                 transitionDelay: prefersReducedMotion.current ? "0ms" : `${i * (window.innerWidth <= 768 ? 75 : 50)}ms`,
               }}
             >
-              <figure className="relative group">
+              <figure 
+                className="relative group"
+              >
                 <picture>
                   <source 
                     type="image/webp"
@@ -198,7 +230,11 @@ export default function GallerySection() {
                     fetchPriority={i === 0 ? "high" : i <= 2 ? "auto" : undefined}
                     width={1200}
                     height={1500}
-                    className="w-full h-full object-cover aspect-[4/5] transition-all duration-200 ease-out brightness-[0.85] contrast-[1.4]"
+                    className={`w-full h-full object-cover aspect-[4/5] transition-all duration-300 ease-out ${
+                      hovered[i]
+                        ? "brightness-100 contrast-[1.15] scale-105"
+                        : "brightness-[0.85] contrast-[1.4] scale-100"
+                    }`}
                   />
                 </picture>
                 <figcaption className="sr-only">{item.alt}</figcaption>

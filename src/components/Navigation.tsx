@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import logo from "@/assets/Logo_Tattsbyvali_Siegel.png";
+import logoWebp from "@/assets/Logo_Tattsbyvali_Siegel.webp";
+import logoPng from "@/assets/Logo_Tattsbyvali_Siegel.png";
 import CTAButton from "@/components/ui/CTAButton";
 
 // Hamburger Icon Component
@@ -163,18 +164,21 @@ const Navigation = () => {
             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-bronze focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm"
             title="Go to hero"
           >
-            <img
-              src={logo}
-              alt="Tatts by Vali Siegel"
-              width={80}
-              height={56}
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-              className={`${scrolled ? "h-[clamp(32px,8vw,48px)]" : "h-[clamp(40px,10vw,56px)]"} w-auto px-[clamp(4px,1vw,8px)] opacity-90 hover:opacity-100 transition-[height,transform,opacity] duration-300 ${
-                reducedMotion ? "hover:drop-shadow-[0_0_2px_rgba(164,107,62,0.25)]" : "hover:drop-shadow-[0_0_4px_rgba(164,107,62,0.5)]"
-              } ${reducedMotion ? "" : "hover:scale-105"}`}
-            />
+            <picture>
+              <source type="image/webp" srcSet={logoWebp} />
+              <img
+                src={logoPng}
+                alt="Tatts by Vali Siegel"
+                width={80}
+                height={80}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                className={`${scrolled ? "h-[clamp(32px,8vw,48px)]" : "h-[clamp(40px,10vw,56px)]"} w-auto px-[clamp(4px,1vw,8px)] opacity-90 hover:opacity-100 transition-[height,transform,opacity] duration-300 ${
+                  reducedMotion ? "hover:drop-shadow-[0_0_2px_rgba(164,107,62,0.25)]" : "hover:drop-shadow-[0_0_4px_rgba(164,107,62,0.5)]"
+                } ${reducedMotion ? "" : "hover:scale-105"}`}
+              />
+            </picture>
           </button>
 
           <div className="hidden md:flex items-center gap-[clamp(12px,3vw,20px)]">
@@ -253,11 +257,16 @@ const Navigation = () => {
             <div className="mobile-menu-panel">
               {/* Header */}
               <div className="mobile-menu-header">
-                <img
-                  src={logo}
-                  alt="Tatts by Vali Siegel"
-                  className="mobile-menu-logo"
-                />
+                <picture>
+                  <source type="image/webp" srcSet={logoWebp} />
+                  <img
+                    src={logoPng}
+                    alt="Tatts by Vali Siegel"
+                    width={80}
+                    height={80}
+                    className="mobile-menu-logo"
+                  />
+                </picture>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label="Menü schließen"

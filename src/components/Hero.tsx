@@ -1,5 +1,6 @@
-// Banner.png optimiert für bessere Performance
-import heroJpg from "@/assets/Banner.png";
+// Banner.webp optimiert für bessere Performance
+import heroWebp from "@/assets/Banner.webp";
+import heroPng from "@/assets/Banner.png";
 import "@/styles/hero.css";
 
 const Hero = () => {
@@ -9,32 +10,15 @@ const Hero = () => {
       aria-labelledby="hero-heading"
       className="relative h-[clamp(600px,85vh,900px)] w-full flex items-center justify-center bg-black text-left overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-black/30 before:pointer-events-none before:z-[1]"
     >
-      {/* Background Image - Mobile-optimized responsive Banner.png */}
+      {/* Background Image - Optimized WebP for performance */}
       <picture>
         <source
           type="image/webp"
-          srcSet={`
-            ${heroJpg}?w=480&q=75&f=webp 480w,
-            ${heroJpg}?w=640&q=80&f=webp 640w,
-            ${heroJpg}?w=768&q=85&f=webp 768w,
-            ${heroJpg}?w=1024&q=85&f=webp 1024w,
-            ${heroJpg}?w=1920&q=90&f=webp 1920w
-          `}
-          sizes="100vw"
-        />
-        <source
-          type="image/png"
-          srcSet={`
-            ${heroJpg}?w=480&q=70 480w,
-            ${heroJpg}?w=640&q=75 640w,
-            ${heroJpg}?w=768&q=80 768w,
-            ${heroJpg}?w=1024&q=85 1024w,
-            ${heroJpg}?w=1920&q=90 1920w
-          `}
-          sizes="100vw"
+          srcSet={heroWebp}
+          media="(min-width: 1px)"
         />
         <img
-          src={heroJpg}
+          src={heroPng}
           alt="Valerio arbeitet professionell an einem Tattoo mit moderner Maschine – präzise Handarbeit im privaten Studio"
           className="absolute inset-0 w-full h-full object-cover brightness-[0.9] contrast-[1.2]"
           loading="eager"

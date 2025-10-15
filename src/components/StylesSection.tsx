@@ -59,6 +59,9 @@ const StylesSection: React.FC = () => {
   const [cardVisibility, setCardVisibility] = useState<boolean[]>(
     () => new Array(styles.length).fill(false)
   );
+  const [hovered, setHovered] = useState<boolean[]>(
+    () => new Array(styles.length).fill(false)
+  );
   const [delays, setDelays] = useState<number[]>(() => new Array(styles.length).fill(0));
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const prefersReducedMotion = useRef(false);
@@ -85,7 +88,8 @@ const StylesSection: React.FC = () => {
       };
     }
 
-    const observer = new IntersectionObserver(
+    // IntersectionObserver for scroll-in visibility
+    const visibilityObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -98,7 +102,7 @@ const StylesSection: React.FC = () => {
                 newVisibility[index] = true;
                 return newVisibility;
               });
-              observer.unobserve(entry.target);
+              visibilityObserver.unobserve(entry.target);
             }
           }
         });
@@ -106,11 +110,38 @@ const StylesSection: React.FC = () => {
       { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.15 }
     );
 
+    // IntersectionObserver for hover effect on mobile (when card is centered in viewport)
+    const hoverObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cardRefs.current.indexOf(entry.target as HTMLElement);
+          if (index !== -1) {
+            setHovered((prev) => {
+              const copy = [...prev];
+              copy[index] = entry.isIntersecting && entry.intersectionRatio > 0.5;
+              return copy;
+            });
+          }
+        });
+      },
+      { 
+        root: null, 
+        rootMargin: "-25% 0px -25% 0px", // Trigger when card is in the middle 50% of viewport
+        threshold: [0, 0.25, 0.5, 0.75, 1] 
+      }
+    );
+
     // Observe elements with proper cleanup
-    cardRefs.current.forEach((el) => el && observer.observe(el));
+    cardRefs.current.forEach((el) => {
+      if (el) {
+        visibilityObserver.observe(el);
+        hoverObserver.observe(el);
+      }
+    });
     
     return () => {
-      observer.disconnect();
+      visibilityObserver.disconnect();
+      hoverObserver.disconnect();
       mediaQuery.removeEventListener?.('change', onChange);
     };
   }, []);
@@ -179,10 +210,14 @@ const StylesSection: React.FC = () => {
             <article
               key={style.id}
               ref={(el) => (cardRefs.current[index] = el)}
-              className={`style-card group overflow-hidden rounded-2xl ring-1 ring-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.35)]
+              className={`style-card group overflow-hidden rounded-2xl 
                 will-change-transform transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)]
                 focus-within:ring-2 focus-within:ring-accent-bronze focus-within:ring-offset-2 focus-within:ring-offset-background
-                ${cardVisibility[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
+                ${cardVisibility[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}
+                ${hovered[index] 
+                  ? "ring-2 ring-accent-bronze/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] scale-[1.02]" 
+                  : "ring-1 ring-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] scale-100"
+                }`}
               style={{
                 transitionDelay: prefersReducedMotion.current ? "0ms" : `${delays[index]}ms`,
               }}
@@ -201,7 +236,9 @@ const StylesSection: React.FC = () => {
                   <img
                     src={style.imageSrc}
                     alt={style.imageAlt}
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-active:scale-105 focus-visible:scale-105"
+                    className={`w-full h-full object-cover transition-all duration-500 ${
+                      hovered[index] ? "scale-105" : "scale-100"
+                    }`}
                     loading={index < 2 ? "eager" : "lazy"}
                     decoding="async"
                     fetchPriority={index === 0 ? "high" : undefined}
@@ -211,8 +248,7 @@ const StylesSection: React.FC = () => {
                 </div>
 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none
-                  opacity-100 group-hover:opacity-100 group-active:opacity-100 focus-visible:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none opacity-100 transition-opacity duration-500" />
 
                 {/* Content */}
                 <div className="absolute left-0 right-0 bottom-0 p-[clamp(12px,3vw,24px)]">

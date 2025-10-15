@@ -33,6 +33,9 @@ export default function TestimonialsSection() {
   const [visible, setVisible] = useState<boolean[]>(
     new Array(TESTIMONIALS.length).fill(true)
   );
+  const [hovered, setHovered] = useState<boolean[]>(
+    new Array(TESTIMONIALS.length).fill(false)
+  );
   const refs = useRef<(HTMLElement | null)[]>([]);
   const prefersReduced = useRef(false);
 
@@ -43,7 +46,9 @@ export default function TestimonialsSection() {
       setVisible(new Array(TESTIMONIALS.length).fill(true));
       return;
     }
-    const obs = new IntersectionObserver(
+    
+    // IntersectionObserver for scroll-in animations
+    const visibilityObs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
@@ -55,14 +60,51 @@ export default function TestimonialsSection() {
               c[idx] = true;
               return c;
             });
-            obs.unobserve(e.target);
+            visibilityObs.unobserve(e.target);
           }
         });
       },
       { root: null, threshold: 0.1, rootMargin: "50px 0px 0px 0px" }
     );
-    refs.current.forEach((el) => el && obs.observe(el));
-    return () => obs.disconnect();
+
+    // IntersectionObserver for hover effect on mobile (when card is centered in viewport)
+    const hoverObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const idx = refs.current.indexOf(entry.target as HTMLElement);
+          if (idx !== -1) {
+            setHovered((prev) => {
+              const copy = [...prev];
+              copy[idx] = entry.isIntersecting && entry.intersectionRatio > 0.5;
+              return copy;
+            });
+          }
+        });
+      },
+      { 
+        root: null, 
+        rootMargin: "-25% 0px -25% 0px", // Trigger when card is in the middle 50% of viewport
+        threshold: [0, 0.25, 0.5, 0.75, 1] 
+      }
+    );
+
+    refs.current.forEach((el) => {
+      if (el) {
+        visibilityObs.observe(el);
+        hoverObs.observe(el);
+      }
+    });
+    
+    return () => {
+      visibilityObs.disconnect();
+      hoverObs.disconnect();
+      refs.current.forEach((el) => {
+        if (el) {
+          visibilityObs.unobserve(el);
+          hoverObs.unobserve(el);
+        }
+      });
+    };
   }, []);
 
   // JSON-LD Schema for SEO
@@ -146,11 +188,13 @@ export default function TestimonialsSection() {
               <div
                 ref={(el) => (refs.current[i] = el)}
                 className={`testimonial-card group relative rounded-[14px] 
-                  ring-1 ring-white/5 
-                  shadow-[0_6px_20px_rgba(0,0,0,0.35)] 
                   transition-all duration-300 ease-out
                   flex-1 flex flex-col min-h-[280px]
-                  ${visible[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                  ${visible[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
+                  ${hovered[i] 
+                    ? "ring-2 ring-accent-bronze/50 shadow-[0_8px_30px_rgba(0,0,0,0.45)] scale-[1.02]" 
+                    : "ring-1 ring-white/5 shadow-[0_6px_20px_rgba(0,0,0,0.35)] scale-100"
+                  }`}
                 style={{
                   transitionDelay: prefersReduced.current ? "0ms" : `${i * 100}ms`,
                 }}
@@ -159,7 +203,11 @@ export default function TestimonialsSection() {
                 {/* Quote icon with subtle animation */}
                 <svg
                   aria-hidden="true"
-                  className="w-[clamp(20px,5vw,24px)] h-[clamp(20px,5vw,24px)] mb-[clamp(12px,3vw,16px)] text-accent-bronze/70 transition-all duration-300 group-hover:text-accent-bronze group-hover:scale-110"
+                  className={`w-[clamp(20px,5vw,24px)] h-[clamp(20px,5vw,24px)] mb-[clamp(12px,3vw,16px)] transition-all duration-300 ${
+                    hovered[i] 
+                      ? "text-accent-bronze scale-110" 
+                      : "text-accent-bronze/70 scale-100"
+                  }`}
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >

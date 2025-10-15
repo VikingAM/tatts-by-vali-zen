@@ -21,9 +21,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Fonts with display=swap for better performance - Only used weights -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Fonts with display=swap and async loading for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    </noscript>
 
     <meta property="og:title" content="Precision with Soul" />
     <meta property="og:description" content="Precision with Soul: Feine Linien, klare Form – deine Geschichte. Sorgfältig entwickelt, präzise gestochen, mit Zeit für jedes Detail." />
@@ -105,8 +109,8 @@
     }
     </script>
 
-    <!-- Preload critical hero assets -->
-    <link rel="preload" as="image" href="/src/assets/Banner.png" type="image/png">
+    <!-- Preload critical hero assets - WebP for better performance -->
+    <link rel="preload" as="image" href="/src/assets/Banner.webp" type="image/webp" fetchpriority="high">
     
     <!-- Critical CSS for hero section -->
     <style>
