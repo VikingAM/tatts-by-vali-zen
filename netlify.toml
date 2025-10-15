@@ -1,6 +1,11 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  functions = "netlify/functions"
+
+# Form notifications
+[[plugins]]
+  package = "@netlify/plugin-forms"
 
 # Redirect rules for SPA
 [[redirects]]

@@ -54,18 +54,14 @@ const Contact = () => {
     setFormState('loading');
     
     try {
-      // Submit to backend endpoint
-      const response = await fetch('/api/contact', {
+      // Submit to Netlify Forms
+      const formElement = e.target as HTMLFormElement;
+      const formDataToSend = new FormData(formElement);
+      
+      const response = await fetch('/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          consent: formData.privacy
-        }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formDataToSend as any).toString(),
       });
 
       if (!response.ok) {
@@ -82,9 +78,21 @@ const Contact = () => {
         honeypot: ""
       });
 
+      // Show success toast
+      toast({
+        title: "Nachricht gesendet! ✨",
+        description: "Ich melde mich persönlich innerhalb von 24–48 Stunden.",
+      });
+
     } catch (error) {
       setFormState('error');
       setGlobalError("Das hat leider nicht geklappt. Bitte versuch es erneut oder schreib an vali@tattsbyvali.ch.");
+      
+      toast({
+        title: "Fehler",
+        description: "Die Nachricht konnte nicht gesendet werden.",
+        variant: "destructive",
+      });
     }
   };
 
