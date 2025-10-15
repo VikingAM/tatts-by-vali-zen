@@ -1,5 +1,7 @@
-// Banner.webp optimiert für bessere Performance
-import heroWebp from "@/assets/Banner.webp";
+// Responsive Banner images for optimal performance
+import heroWebp480 from "@/assets/Banner-480w.webp";
+import heroWebp768 from "@/assets/Banner-768w.webp";
+import heroWebp1024 from "@/assets/Banner-1024w.webp";
 import heroPng from "@/assets/Banner.png";
 import "@/styles/hero.css";
 
@@ -10,22 +12,22 @@ const Hero = () => {
       aria-labelledby="hero-heading"
       className="relative h-[clamp(600px,85vh,900px)] w-full flex items-center justify-center bg-black text-left overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-black/30 before:pointer-events-none before:z-[1]"
     >
-      {/* Background Image - Optimized WebP for performance */}
+      {/* Background Image - Responsive WebP for optimal performance */}
       <picture>
         <source
           type="image/webp"
-          srcSet={heroWebp}
-          media="(min-width: 1px)"
+          srcSet={`${heroWebp480} 480w, ${heroWebp768} 768w, ${heroWebp1024} 1024w`}
+          sizes="100vw"
         />
         <img
           src={heroPng}
-          alt="Valerio arbeitet professionell an einem Tattoo mit moderner Maschine – präzise Handarbeit im privaten Studio"
+          alt="Tattoo Studio Holderbank"
           className="absolute inset-0 w-full h-full object-cover brightness-[0.9] contrast-[1.2]"
           loading="eager"
           decoding="async"
           fetchPriority="high"
-          width="1920"
-          height="1080"
+          width="1024"
+          height="683"
         />
       </picture>
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import logoWebp from "@/assets/Logo_Tattsbyvali_Siegel.webp";
+import logoWebp48 from "@/assets/Logo_Tattsbyvali_Siegel-48w.webp";
+import logoWebp96 from "@/assets/Logo_Tattsbyvali_Siegel-96w.webp";
 import logoPng from "@/assets/Logo_Tattsbyvali_Siegel.png";
 import CTAButton from "@/components/ui/CTAButton";
 
@@ -165,12 +166,16 @@ const Navigation = () => {
             title="Go to hero"
           >
             <picture>
-              <source type="image/webp" srcSet={logoWebp} />
+              <source 
+                type="image/webp" 
+                srcSet={`${logoWebp48} 48w, ${logoWebp96} 96w`}
+                sizes="(max-width: 768px) 48px, 56px"
+              />
               <img
                 src={logoPng}
-                alt="Tatts by Vali Siegel"
-                width={80}
-                height={80}
+                alt="Tatts by Vali Logo"
+                width={56}
+                height={56}
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
@@ -258,12 +263,16 @@ const Navigation = () => {
               {/* Header */}
               <div className="mobile-menu-header">
                 <picture>
-                  <source type="image/webp" srcSet={logoWebp} />
+                  <source 
+                    type="image/webp" 
+                    srcSet={`${logoWebp48} 48w, ${logoWebp96} 96w`}
+                    sizes="48px"
+                  />
                   <img
                     src={logoPng}
-                    alt="Tatts by Vali Siegel"
-                    width={80}
-                    height={80}
+                    alt="Tatts by Vali Logo"
+                    width={48}
+                    height={48}
                     className="mobile-menu-logo"
                   />
                 </picture>

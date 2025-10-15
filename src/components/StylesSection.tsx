@@ -1,10 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import CTAButton from "@/components/ui/CTAButton";
 
-// Import images properly for Vite
+// Import responsive images
+import realismWebp480 from "@/assets/style-realism-480w.webp";
+import realismWebp640 from "@/assets/style-realism-640w.webp";
 import realismImg from "@/assets/style-realism.jpg";
+
+import scriptWebp480 from "@/assets/style-script-480w.webp";
+import scriptWebp640 from "@/assets/style-script-640w.webp";
 import scriptImg from "@/assets/style-script.jpg";
+
+import finelineWebp480 from "@/assets/style-fineline-480w.webp";
+import finelineWebp640 from "@/assets/style-fineline-640w.webp";
 import finelineImg from "@/assets/style-fineline.jpg";
+
+import symbolicWebp480 from "@/assets/style-symbolic-480w.webp";
+import symbolicWebp640 from "@/assets/style-symbolic-640w.webp";
 import symbolicImg from "@/assets/style-symbolic.jpg";
 
 const intro = [
@@ -18,32 +29,36 @@ const styles = [
     id: "stil-realismus",
     title: "Realismus",
     description: "Präzise Details. Lebendige Tiefe. Ideal für Porträts und strukturreiche Motive.",
+    webpSrcset: `${realismWebp480} 480w, ${realismWebp640} 640w`,
     imageSrc: realismImg,
-    imageAlt: "Tattoo im Realismus-Stil, Detail eines Auges.",
+    imageAlt: "Realism Tattoo",
     ariaLabel: "Mehr zum Stil Realismus"
   },
   {
     id: "stil-schriftzug",
     title: "Schriftzug",
     description: "Klare Botschaft. Elegante Schrift. Für Namen, Daten und Zitate.",
+    webpSrcset: `${scriptWebp480} 480w, ${scriptWebp640} 640w`,
     imageSrc: scriptImg,
-    imageAlt: "Tattoo im Schriftzug-Stil, typografisches Motiv auf Haut.",
+    imageAlt: "Script Tattoo",
     ariaLabel: "Mehr zum Stil Schriftzug"
   },
   {
     id: "stil-feine-linie",
     title: "Feine Linie",
     description: "Feine Linie. Stille Eleganz. Dezent im Alltag, stark in der Aussage.",
+    webpSrcset: `${finelineWebp480} 480w, ${finelineWebp640} 640w`,
     imageSrc: finelineImg,
-    imageAlt: "Tattoo im Fine-Line-Stil, zarte Zweiglinie am Arm.",
+    imageAlt: "Fineline Tattoo",
     ariaLabel: "Mehr zum Stil Feine Linie"
   },
   {
     id: "stil-symbolik",
     title: "Micro-Realismus",
     description: "Symbole mit Seele. Bedeutung im Detail. Zeitlos und persönlich.",
+    webpSrcset: `${symbolicWebp480} 480w, ${symbolicWebp640} 640w`,
     imageSrc: symbolicImg,
-    imageAlt: "Tattoo im Stil Micro-Realismus, geometrisches Symbol auf Schulter.",
+    imageAlt: "Micro-Realism Tattoo",
     ariaLabel: "Mehr zum Stil Micro-Realismus"
   }
 ];
@@ -180,7 +195,7 @@ const StylesSection: React.FC = () => {
       <div className="container mx-auto max-w-[clamp(320px,95vw,1280px)] px-[clamp(16px,4vw,24px)]">
         {/* Header */}
         <div className="text-center md:text-left mb-[clamp(32px,8vw,64px)]">
-          <p className="text-[clamp(10px,2.5vw,14px)] tracking-[0.18em] uppercase text-accent-bronze/80 mb-[clamp(4px,1vw,8px)]">
+          <p className="text-[clamp(10px,2.5vw,14px)] tracking-[0.18em] uppercase text-accent-bronze mb-[clamp(4px,1vw,8px)]">
             Zwischen Präzision und Gefühl entsteht Stil.
           </p>
           <h2
@@ -233,18 +248,25 @@ const StylesSection: React.FC = () => {
               >
                 {/* Image with fixed aspect ratio for CLS prevention */}
                 <div className="aspect-[3/2] overflow-hidden bg-neutral-900">
-                  <img
-                    src={style.imageSrc}
-                    alt={style.imageAlt}
-                    className={`w-full h-full object-cover transition-all duration-500 ${
-                      hovered[index] ? "scale-105" : "scale-100"
-                    }`}
-                    loading={index < 2 ? "eager" : "lazy"}
-                    decoding="async"
-                    fetchPriority={index === 0 ? "high" : undefined}
-                    width="1200"
-                    height="800"
-                  />
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcSet={style.webpSrcset}
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                    <img
+                      src={style.imageSrc}
+                      alt={style.imageAlt}
+                      className={`w-full h-full object-cover transition-all duration-500 ${
+                        hovered[index] ? "scale-105" : "scale-100"
+                      }`}
+                      loading={index < 2 ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchPriority={index === 0 ? "high" : undefined}
+                      width="640"
+                      height="427"
+                    />
+                  </picture>
                 </div>
 
                 {/* Gradient overlay */}

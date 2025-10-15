@@ -1,5 +1,6 @@
 import React from "react";
-import valerioWebp from "@/assets/Valerio.webp";
+import valerioWebp480 from "@/assets/Valerio-480w.webp";
+import valerioWebp768 from "@/assets/Valerio-768w.webp";
 
 /**
  * AboutSection Component
@@ -47,15 +48,22 @@ const AboutSection = () => {
             {/* Image */}
             <div className="relative">
               <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-neutral-900">
-                <img
-                  src={valerioWebp}
-                  alt="Valerio tätowiert im privaten Studio"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                  width="900"
-                  height="1125"
-                />
+                <picture>
+                  <source 
+                    type="image/webp"
+                    srcSet={`${valerioWebp480} 480w, ${valerioWebp768} 768w`}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <img
+                    src={valerioWebp768}
+                    alt="Valerio - Tattoo Artist"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    width="768"
+                    height="960"
+                  />
+                </picture>
               </div>
             </div>
           </div>

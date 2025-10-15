@@ -158,7 +158,7 @@ export default function TestimonialsSection() {
       <div className="container mx-auto max-w-[clamp(320px,95vw,1280px)] px-[clamp(16px,4vw,24px)]">
         <div role="region" aria-label="Stimmen meiner Kundinnen und Kunden">
           {/* Eyebrow */}
-          <p className="text-[clamp(10px,2.5vw,14px)] tracking-[0.18em] uppercase text-accent-bronze/80 mb-[clamp(4px,1vw,8px)] text-center md:text-left">
+          <p className="text-[clamp(10px,2.5vw,14px)] tracking-[0.18em] uppercase text-accent-bronze mb-[clamp(4px,1vw,8px)] text-center md:text-left">
             Erinnerungen, die mit dir gehen.
           </p>
 

@@ -2,28 +2,40 @@ import React, { useEffect, useRef, useState } from "react";
 import CTAButton from "@/components/ui/CTAButton";
 import { InstagramIcon } from "@/components/icons/InstagramIcon";
 
-// WebP + Fallback Imports (je Motiv)
-import floraleWebp from "@/assets/Florale.webp";
+// Responsive WebP Imports
+import floraleWebp400 from "@/assets/Florale-400w.webp";
+import floraleWebp600 from "@/assets/Florale-600w.webp";
+import floraleWebp800 from "@/assets/Florale-800w.webp";
 import floraleJpg from "@/assets/Florale.JPG";
 
-import skriptWebp from "@/assets/Skript.webp";
+import skriptWebp400 from "@/assets/Skript-400w.webp";
+import skriptWebp600 from "@/assets/Skript-600w.webp";
+import skriptWebp800 from "@/assets/Skript-800w.webp";
 import skriptJpg from "@/assets/Skript.JPG";
 
-import schmetterlingWebp from "@/assets/Schmetterling.webp";
+import schmetterlingWebp400 from "@/assets/Schmetterling-400w.webp";
+import schmetterlingWebp600 from "@/assets/Schmetterling-600w.webp";
+import schmetterlingWebp800 from "@/assets/Schmetterling-800w.webp";
 import schmetterlingJpg from "@/assets/Schmetterling.JPG";
 
-import roseWebp from "@/assets/Rose.webp";
+import roseWebp400 from "@/assets/Rose-400w.webp";
+import roseWebp600 from "@/assets/Rose-600w.webp";
+import roseWebp800 from "@/assets/Rose-800w.webp";
 import roseJpg from "@/assets/Rose.JPG";
 
-import mariaTextWebp from "@/assets/MariaText.webp";
+import mariaTextWebp400 from "@/assets/MariaText-400w.webp";
+import mariaTextWebp600 from "@/assets/MariaText-600w.webp";
+import mariaTextWebp800 from "@/assets/MariaText-800w.webp";
 import mariaTextJpg from "@/assets/MariaText.JPG";
 
-import mariaRoseWebp from "@/assets/MariaRose.webp";
+import mariaRoseWebp400 from "@/assets/MariaRose-400w.webp";
+import mariaRoseWebp600 from "@/assets/MariaRose-600w.webp";
+import mariaRoseWebp800 from "@/assets/MariaRose-800w.webp";
 import mariaRoseJpg from "@/assets/MariaRose.jpg";
 
 type Item = {
   key: string;
-  webp: string;
+  webpSrcset: string;
   fallback: string;
   alt: string;
 };
@@ -31,39 +43,39 @@ type Item = {
 const ITEMS: Item[] = [
   {
     key: "florale",
-    webp: floraleWebp,
+    webpSrcset: `${floraleWebp400} 400w, ${floraleWebp600} 600w, ${floraleWebp800} 800w`,
     fallback: floraleJpg,
-    alt: "Florales Oberschenkel-Tattoo in Schwarzgrau, feine Linien und Schattierung.",
+    alt: "Florales Oberschenkel-Tattoo",
   },
   {
     key: "skript",
-    webp: skriptWebp,
+    webpSrcset: `${skriptWebp400} 400w, ${skriptWebp600} 600w, ${skriptWebp800} 800w`,
     fallback: skriptJpg,
-    alt: "Feiner Script-Schriftzug mit römischen Zahlen und Namen am Unterarm.",
+    alt: "Script-Schriftzug Tattoo",
   },
   {
     key: "schmetterling",
-    webp: schmetterlingWebp,
+    webpSrcset: `${schmetterlingWebp400} 400w, ${schmetterlingWebp600} 600w, ${schmetterlingWebp800} 800w`,
     fallback: schmetterlingJpg,
-    alt: "Schmetterling mit Rosen und zartem Script am Oberarm.",
+    alt: "Schmetterling Tattoo",
   },
   {
     key: "rose",
-    webp: roseWebp,
+    webpSrcset: `${roseWebp400} 400w, ${roseWebp600} 600w, ${roseWebp800} 800w`,
     fallback: roseJpg,
-    alt: "Einzelne Rose, fein schattiert, mit deutlicher Blattstruktur.",
+    alt: "Rose Tattoo",
   },
   {
     key: "mariaText",
-    webp: mariaTextWebp,
+    webpSrcset: `${mariaTextWebp400} 400w, ${mariaTextWebp600} 600w, ${mariaTextWebp800} 800w`,
     fallback: mariaTextJpg,
-    alt: "Madonna mit Kirchturm und Text – realistisches Unterarm-Tattoo.",
+    alt: "Madonna Tattoo",
   },
   {
     key: "mariaRose",
-    webp: mariaRoseWebp,
+    webpSrcset: `${mariaRoseWebp400} 400w, ${mariaRoseWebp600} 600w, ${mariaRoseWebp800} 800w`,
     fallback: mariaRoseJpg,
-    alt: "Madonna mit Rose – Realism-Tattoo in Grauschattierung (Innenarm).",
+    alt: "Madonna mit Rose Tattoo",
   },
 ];
 
@@ -171,7 +183,7 @@ export default function GallerySection() {
       {/* Region landmark for accessibility */}
       <div role="region" aria-label="Galerie">
         {/* Eyebrow */}
-        <p className="text-[clamp(10px,2.5vw,14px)] tracking-[0.18em] uppercase text-accent-bronze/80 mb-[clamp(4px,1vw,8px)] text-center md:text-left">
+        <p className="text-[clamp(10px,2.5vw,14px)] tracking-[0.18em] uppercase text-accent-bronze mb-[clamp(4px,1vw,8px)] text-center md:text-left">
           Geschichten unter der Haut.
         </p>
 
@@ -219,7 +231,7 @@ export default function GallerySection() {
                 <picture>
                   <source 
                     type="image/webp"
-                    srcSet={`${item.webp} 480w, ${item.webp} 768w, ${item.webp} 1024w, ${item.webp} 1440w`}
+                    srcSet={item.webpSrcset}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <img
@@ -228,8 +240,8 @@ export default function GallerySection() {
                     loading={i === 0 ? "eager" : "lazy"}
                     decoding="async"
                     fetchPriority={i === 0 ? "high" : i <= 2 ? "auto" : undefined}
-                    width={1200}
-                    height={1500}
+                    width={800}
+                    height={1000}
                     className={`w-full h-full object-cover aspect-[4/5] transition-all duration-300 ease-out ${
                       hovered[i]
                         ? "brightness-100 contrast-[1.15] scale-105"
@@ -237,7 +249,6 @@ export default function GallerySection() {
                     }`}
                   />
                 </picture>
-                <figcaption className="sr-only">{item.alt}</figcaption>
               </figure>
             </li>
           ))}

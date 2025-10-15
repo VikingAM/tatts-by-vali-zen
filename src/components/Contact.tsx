@@ -143,7 +143,7 @@ const Contact = () => {
           <div className="lg:col-span-1">
             {/* Header */}
             <div className="text-center md:text-left mb-[clamp(24px,6vw,32px)]">
-              <p className="text-[clamp(10px,2.5vw,14px)] tracking-[0.18em] uppercase text-accent-bronze/80 mb-[clamp(4px,1vw,8px)]">
+              <p className="text-[clamp(10px,2.5vw,14px)] tracking-[0.18em] uppercase text-accent-bronze mb-[clamp(4px,1vw,8px)]">
                 ZEIT FÜR DEINE GESCHICHTE.
               </p>
               <h2
